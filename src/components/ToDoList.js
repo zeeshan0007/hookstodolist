@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import AddNewToDo from './AddNewToDo';
 
 const ToDoList=()=> {
+
     
    const [todos,setTodos]= useState(
   
@@ -10,11 +11,20 @@ const ToDoList=()=> {
 		{id:2, text: 'Dentist at 5pm', done: false },
 		{id:3, text: 'Go to Gym', done: false },
     ],
-  
+
     )
     const[updateId,setUpdateId]=useState("");
     const[newToDo,setNewToDo]=useState("");
-    
+    const items = localStorage.getItem('todo');
+
+    useEffect(() => {
+        const items = localStorage.getItem('todo');
+        if (items) {
+            setTodos([
+                ...todos,//get the previous objects in the useState
+               {id:getTime(), text:items,done:false}
+            ]);        }
+      },[items])
 
   const  getTime=()=> {
         let d = new Date();
@@ -149,10 +159,11 @@ const ToDoList=()=> {
                         checked={todo.completed}
                         onChange={() => toggleComplete(todo.id)}
                     />
-                    <button onClick={()=>{handleUpdate(todo.id)}}>Update</button>
-                    <button onClick={()=>{moveUp(index)}}>moveUp</button>
-                    <button onClick={()=>{moveDown(index)}}>moveDown</button>
-
+                    <div className='btndiv'>
+                    <button className='btn1' onClick={()=>{handleUpdate(todo.id)}}>Update</button>
+                    <button className='btn1' onClick={()=>{moveUp(index)}}>moveUp</button>
+                    <button className='btn1' onClick={()=>{moveDown(index)}}>moveDown</button>
+                    </div>
                 </div>
                 
             )

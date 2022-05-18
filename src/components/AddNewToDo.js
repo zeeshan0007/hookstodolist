@@ -1,9 +1,9 @@
 import React from 'react'
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 
 const AddNewToDo=({addtodo,newToDo,setNewToDo,updateId,setUpdateId})=> { //props addtodo
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+ // const { register, handleSubmit, formState: { errors } } = useForm();
  // const onSubmit = data => console.log(data);
 
     const handleSubmitt=(e)=> {
@@ -19,24 +19,18 @@ const AddNewToDo=({addtodo,newToDo,setNewToDo,updateId,setUpdateId})=> { //props
       setNewToDo('')
     }
   return (
-    <form onSubmit={handleSubmitt} >
+    <form className='form' onSubmit={handleSubmitt} >
       {/*call setState and set the form input to the todos  */}
-      {/* <input id='todo' onChange={(e)=>setNewToDo(e.target.value)} type='text' defaultValue={newToDo} {...register("newToDO")}/> */}
 
-        <input type='text' value={newToDo} id='todo' onChange={(e)=>setNewToDo(e.target.value)} ></input> 
+        <input type='text' value={newToDo} id='todo' className='input-field' onChange={(e)=>setNewToDo(e.target.value)} ></input> 
         <input type="submit"></input>
         {updateId && <button
 						className="back"
 						onClick={()=>setFieldsEmpty()}
 						type="button">
 						Cancel
-             		 </button>}
+          </button>}
     </form>
   )
 }
 export default AddNewToDo;
-
-{/* <form onSubmit={handleSubmit(onSubmit)}>
-      <input defaultValue="test" {...register("zeeshan")} />
-      <input {...register("exampleRequired", { required: true })} />
-      {errors.exampleRequired && <p>This field is required</p>} */}
